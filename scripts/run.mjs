@@ -1,11 +1,11 @@
-// Uso: pnpm dev <gioco> | pnpm build <gioco>
+// Usage: pnpm dev <game> | pnpm build <game>
 import { spawnSync } from 'node:child_process'
 import { existsSync, readdirSync } from 'node:fs'
 
 const [cmd, game] = process.argv.slice(2)
 const games = readdirSync('games').filter((g) => !g.startsWith('_'))
 if (!game || !existsSync(`games/${game}`)) {
-  console.error(`Uso: pnpm ${cmd} <gioco>\nGiochi disponibili: ${games.join(', ') || '(nessuno, usa pnpm new <nome>)'}`)
+  console.error(`Usage: pnpm ${cmd} <game>\nAvailable games: ${games.join(', ') || '(none, use pnpm new <name>)'}`)
   process.exit(1)
 }
 const r = spawnSync('pnpm', ['--dir', `games/${game}`, cmd], { stdio: 'inherit' })

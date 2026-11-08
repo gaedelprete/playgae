@@ -1,33 +1,33 @@
-# playgae — framework per giochi HTML5 su Playgama
+# playgae — framework for HTML5 games on Playgama
 
-Monorepo pnpm. Stack: **Phaser 3 + TypeScript + Vite**, SDK **@playgama/bridge**.
+pnpm monorepo. Stack: **Phaser 3 + TypeScript + Vite**, **@playgama/bridge** SDK.
 
-## Struttura
-- `packages/core` (`@playgae/core`): `createGame`, `platform` (Bridge: ads, pause, lingua, gameReady), `storage` (salvataggi), `createI18n`, PreloadScene.
-- `packages/vite-config`: `defineGameConfig()` (base `./`, Bridge incluso in locale).
-- `games/<slug>/`: un gioco = `src/`, `public/` (asset), `game.json` (nome, versione, stato, note), `CHANGELOG.md`. `games/_template` è il punto di partenza (non toccarlo per un gioco specifico).
-- `scripts/`: `new-game`, `pack-game`, `run`. `releases/`: zip pronti (gitignored).
+## Language rule
+All support files (README, CLAUDE.md, skills, changelogs, game.json notes, script output, code comments, commit messages) must be written in **English**. Only in-game player-facing text is localized via `createI18n`.
 
-## Comandi
-- `pnpm new <slug> "Titolo"` crea un gioco dal template
+## Layout
+- `packages/core` (`@playgae/core`): `createGame`, `platform` (Bridge: ads, pause, language, gameReady), `storage` (saves), `createI18n`, PreloadScene.
+- `packages/vite-config`: `defineGameConfig()` (relative base, Bridge bundled locally).
+- `games/<slug>/`: one game = `src/`, `public/` (assets, `playgama-bridge-config.json`), `game.json` (name, version, status, notes), `CHANGELOG.md`. `games/_template` is the starting point (do not edit it for a specific game).
+- `scripts/`: `new-game`, `pack-game`, `run`. `releases/`: ready zips (gitignored).
+
+## Commands
+- `pnpm new <slug> "Title"` creates a game from the template
 - `pnpm dev <slug>` / `pnpm build <slug>`
-- `pnpm release <slug>` build + `releases/<slug>-<versione>.zip` (index.html in radice)
+- `pnpm release <slug>` builds and writes `releases/<slug>-<version>.zip` (index.html at root)
 - `pnpm test` (Vitest), `pnpm typecheck`
-- Nota: la porta 5173 è spesso occupata da altri progetti Vite; usa `npx vite --port 5199` dentro `games/<slug>`. Non usare `pkill vite`.
+- Port 5173 is often used by other Vite projects: run `npx vite --port 5199` inside `games/<slug>`. Chrome tools may fail on `localhost`; use the LAN IP. Never `pkill vite`.
 
-## Convenzioni
-- Logica di gioco in file TS puri (`logic.ts`) con test Vitest; Phaser solo per rendering/input.
-- Salvataggi solo via `storage`, mai `localStorage`. Testi via `createI18n` (en + it almeno).
-- Risoluzione di design fissa (es. 720x1280 portrait o 1280x720 landscape), scaling FIT già gestito.
-- Chiamare `platform.gameplayStarted()/gameplayStopped()` a inizio/fine partita; interstitial solo tra partite (`platform.showInterstitial()`), rewarded su azione volontaria.
-- Nessun link esterno, audio solo dopo input utente, pause/mute gestiti da `createGame`.
-- Ad ogni modifica a un gioco: aggiorna `CHANGELOG.md` e la versione in `game.json`.
+## Conventions
+- Game logic in pure TS files (`logic.ts`) with Vitest tests; Phaser only for rendering/input.
+- Saves only via `storage`, never `localStorage`. Player text via `createI18n` (at least en + it).
+- Fixed design resolution (e.g. 720x1280 portrait or 1280x720 landscape); FIT scaling is already handled.
+- Call `platform.gameplayStarted()/gameplayStopped()` at round start/end; interstitials only between rounds (`platform.showInterstitial()`), rewarded ads only on voluntary action.
+- No external links, audio only after user input; pause/mute handled by `createGame`.
+- On every game change: update `CHANGELOG.md`, bump the version in `game.json`, and update `README.md` (games table and ideas).
 
-## Regole Playgama (checklist prima del release)
-Zip < ~20 MB, `index.html` in radice, nessuna richiesta di rete esterna, funziona su mobile touch + desktop, nessun errore in console, ads non invasive.
+## Playgama checklist (before release)
+Zip under ~20 MB, `index.html` at root, no external network requests, works on touch mobile and desktop, no console errors, non-intrusive ads. Regenerate `playgama-bridge-config.json` with the Playgama config editor.
 
-## Giochi
-- `tris`: Tris vs AI (minimax con errori), v0.1.0, vedi `games/tris/game.json`.
-Idee: Puzzle Bubble (griglia esagonale), gioco "sputare dal tetto" (arcade a traiettoria).
-
-Il README.md traccia giochi fatti e idee: aggiornalo quando crei o modifichi un gioco.
+## Games
+See the table in `README.md`.

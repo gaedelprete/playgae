@@ -2,7 +2,7 @@ import { platform } from './platform'
 
 type Dict = Record<string, string>
 
-/** Traduzioni: `createI18n({ en: {...}, it: {...} })`; fallback su "en". */
+/** Translations: `createI18n({ en: {...}, it: {...} })`; falls back to "en". */
 export function createI18n(dicts: Record<string, Dict>) {
   const lang = dicts[platform.language] ? platform.language : 'en'
   return (key: string, vars: Record<string, string | number> = {}): string => {

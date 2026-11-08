@@ -1,40 +1,40 @@
 # playgae
 
-Monorepo per sviluppare piccoli giochi HTML5 da rilasciare su [Playgama](https://playgama.com).
-Stack: **Phaser 3 + TypeScript + Vite**, SDK **@playgama/bridge**, pnpm workspaces.
+Monorepo for building small HTML5 games to release on [Playgama](https://playgama.com).
+Stack: **Phaser 3 + TypeScript + Vite**, **@playgama/bridge** SDK, pnpm workspaces.
 
-## Comandi
+## Commands
 
-| Comando | Cosa fa |
+| Command | What it does |
 |---|---|
-| `pnpm install` | Installa le dipendenze |
-| `pnpm new <slug> "Titolo"` | Crea un nuovo gioco da `games/_template` |
-| `pnpm dev <slug>` | Avvia il gioco in locale (se la 5173 è occupata: `npx vite --port 5199` in `games/<slug>`) |
-| `pnpm build <slug>` | Build in `games/<slug>/dist` |
-| `pnpm release <slug>` | Build + zip in `releases/<slug>-<versione>.zip` |
-| `pnpm test` / `pnpm typecheck` | Test Vitest e controllo TypeScript |
+| `pnpm install` | Install dependencies |
+| `pnpm new <slug> "Title"` | Create a new game from `games/_template` |
+| `pnpm dev <slug>` | Run a game locally (if 5173 is taken: `npx vite --port 5199` inside `games/<slug>`) |
+| `pnpm build <slug>` | Build into `games/<slug>/dist` |
+| `pnpm release <slug>` | Build + zip into `releases/<slug>-<version>.zip` |
+| `pnpm test` / `pnpm typecheck` | Vitest tests and TypeScript check |
 
-Struttura: `packages/core` (codice condiviso: avvio, ads, salvataggi, i18n), `packages/vite-config`, `games/<slug>` (un gioco), `scripts/`.
-Convenzioni e checklist Playgama in [CLAUDE.md](CLAUDE.md).
+Layout: `packages/core` (shared code: startup, ads, saves, i18n), `packages/vite-config`, `games/<slug>` (one game each), `scripts/`.
+Conventions and the Playgama checklist live in [CLAUDE.md](CLAUDE.md).
 
-## Giochi realizzati
+## Games built
 
-| Gioco | Slug | Versione | Stato | Orientamento | Note |
+| Game | Slug | Version | Status | Orientation | Notes |
 |---|---|---|---|---|---|
-| Tris | `tris` | 0.1.0 | In sviluppo (giocabile) | Portrait | Tris vs AI minimax con errori; statistiche salvate; IT/EN |
+| Tris | `tris` | 0.1.0 | In development (playable) | Portrait | Tic-tac-toe vs minimax AI with mistakes; saved stats; IT/EN |
 
 ### Tris
-Tris classico contro il computer. L'AI usa minimax ma sbaglia con il 25% di probabilità, così si può vincere. Le statistiche (vittorie, pareggi, sconfitte) sono salvate tramite il Bridge, l'interstitial compare tra una partita e l'altra. Da fare: controllare a fondo la schermata di fine partita, suoni, livelli di difficoltà, config Bridge reale generata dal config editor.
+Classic tic-tac-toe against the computer. The AI uses minimax but plays randomly 25% of the time, so it can be beaten. Win/draw/loss stats are saved through the Bridge, and an interstitial shows between rounds. To do: check the end-of-game screen thoroughly, sound, difficulty levels, a real Bridge config from the config editor.
 
-## Idee da sviluppare
+## Game ideas
 
-| Gioco | Genere | Meccanica chiave | Complessità | Priorità |
+| Game | Genre | Key mechanic | Complexity | Priority |
 |---|---|---|---|---|
-| Puzzle Bubble | Puzzle | Mira e lancio di bolle su griglia esagonale, gruppi da 3+ | Media | Alta |
-| Sputo dal tetto | Arcade | Timing e traiettoria: sputare dal tetto della scuola sui passanti | Media | Media |
+| Puzzle Bubble | Puzzle | Aim and shoot bubbles on a hex grid, match 3+ | Medium | High |
+| Rooftop Spit | Arcade | Timing and trajectory: spit from a school roof onto passers-by | Medium | Medium |
 
 ### Puzzle Bubble
-Clone del classico: si lancia una bolla colorata verso l'alto, si agganciano gruppi di almeno 3 dello stesso colore per farli scoppiare, e le bolle rimaste senza appoggio cadono. Logica a griglia esagonale in TS puro e testabile (aggancio, ricerca dei gruppi, bolle orfane); Phaser per rendering, mira e input touch. Ogni tot tiri il soffitto scende. Estensioni: livelli, bonus, rewarded per bolle extra.
+Classic clone: shoot a colored bubble upward and attach it to the grid; groups of 3+ of the same color pop, and bubbles left without support fall. Hex-grid logic (attach, group search, orphan detection) in pure, testable TS; Phaser handles rendering, aiming and touch input. The ceiling drops every few shots. Extensions: levels, power-ups, a rewarded ad for extra bubbles.
 
-### Sputo dal tetto
-Arcade a traiettoria ispirato al vecchio gioco in cui due personaggi sputavano dal tetto della scuola. Il giocatore sceglie forza e momento dello sputo con un tocco, mentre i passanti attraversano in basso a velocità diverse; si fa punteggio colpendoli, con penalità se arriva la figura autoritaria. Usa Arcade Physics di Phaser per la caduta. Da definire con cura grafica e personaggi originali, per evitare di riprodurre personaggi con diritti d'autore.
+### Rooftop Spit
+Arcade trajectory game inspired by the old title where two characters spit from a school roof. The player picks power and release moment with a tap while pedestrians cross below at different speeds; points for hits, a penalty when the authority figure shows up. Uses Phaser Arcade Physics for the fall. Needs original characters and art to avoid copyrighted ones.

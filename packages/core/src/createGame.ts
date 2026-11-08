@@ -3,18 +3,18 @@ import { platform } from './platform'
 import { PreloadScene } from './PreloadScene'
 
 export interface GameOptions {
-  /** Risoluzione logica di design (es. 720x1280 verticale, 1280x720 orizzontale). */
+  /** Logical design resolution (e.g. 720x1280 portrait, 1280x720 landscape). */
   width: number
   height: number
   backgroundColor?: string
-  /** Scene del gioco; la prima parte dopo il preload. */
+  /** Game scenes; the first one starts after preload. */
   scenes: Phaser.Types.Scenes.SceneType[]
-  /** Chiamata dal PreloadScene per caricare asset (immagini, audio…). */
+  /** Called by PreloadScene to load assets (images, audio…). */
   preload?: (scene: Phaser.Scene) => void
   physics?: Phaser.Types.Core.PhysicsConfig
 }
 
-/** Avvia il gioco: init Bridge → Phaser con scaling FIT → preload → prima scena → gameReady. */
+/** Starts the game: Bridge init → Phaser with FIT scaling → preload → first scene → gameReady. */
 export async function createGame(opts: GameOptions): Promise<Phaser.Game> {
   await platform.init()
 

@@ -1,6 +1,6 @@
 import bridge from '@playgama/bridge'
 
-/** Salvataggi chiave/valore via Bridge (cloud su Playgama, localStorage in dev). Mai usare localStorage direttamente. */
+/** Key/value saves via the Bridge (cloud on Playgama, localStorage in dev). Never use localStorage directly. */
 export const storage = {
   async get<T>(key: string, fallback: T): Promise<T> {
     try {

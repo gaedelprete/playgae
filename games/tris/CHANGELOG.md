@@ -1,4 +1,5 @@
 # Changelog
 
 ## 0.1.0
-- Scaffold iniziale dal template.
+- Initial scaffold from the template.
+- Tic-tac-toe vs minimax AI (25% mistake chance), saved stats, IT/EN.

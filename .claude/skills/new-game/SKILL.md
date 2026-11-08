@@ -1,9 +1,10 @@
 ---
 name: new-game
-description: Crea un nuovo gioco Playgama nel monorepo playgae. Usare quando l'utente vuole iniziare un nuovo gioco.
+description: Create a new Playgama game in the playgae monorepo. Use when the user wants to start a new game.
 ---
-1. Chiedi concept, orientamento (portrait/landscape) e controlli se non chiari.
-2. `pnpm new <slug> "Titolo"`.
-3. Aggiorna `game.json` (orientation, notes) e la risoluzione in `src/main.ts`.
-4. Scrivi la logica pura in `src/logic.ts` + test, poi le scene Phaser. Usa `@playgae/core`.
-5. `pnpm typecheck && pnpm test`, poi aggiungi il gioco all'elenco in `CLAUDE.md`.
+1. Ask for concept, orientation (portrait/landscape) and controls if unclear.
+2. Run `pnpm new <slug> "Title"`.
+3. Update `game.json` (orientation, notes) and the resolution in `src/main.ts`.
+4. Write pure logic in `src/logic.ts` plus tests, then the Phaser scenes. Use `@playgae/core`.
+5. Run `pnpm typecheck && pnpm test`, then add the game to the README tables.
+All support files must be in English.

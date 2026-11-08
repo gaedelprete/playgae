@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import { platform } from './platform'
 
-/** Scena di caricamento: barra di progresso + segnala il progresso al Bridge, poi avvia la scena successiva. */
+/** Loading scene: progress bar, reports progress to the Bridge, then starts the next scene. */
 export class PreloadScene extends Phaser.Scene {
   constructor(private loadAssets?: (scene: Phaser.Scene) => void) {
     super('Preload')

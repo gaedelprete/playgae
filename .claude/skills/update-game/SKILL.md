@@ -1,8 +1,9 @@
 ---
 name: update-game
-description: Aggiorna un gioco esistente in games/. Usare quando l'utente vuole modificare, migliorare o correggere un gioco già fatto.
+description: Update an existing game in games/. Use when the user wants to modify, improve or fix a finished game.
 ---
-1. Leggi `games/<slug>/game.json`, `CHANGELOG.md` e il codice in `src/`.
-2. Applica le modifiche; logica nuova → test in `logic.test.ts`.
-3. Bump versione in `game.json` (semver) e voce in `CHANGELOG.md`.
-4. `pnpm typecheck && pnpm test`; se pronto, usa la skill release-game.
+1. Read `games/<slug>/game.json`, `CHANGELOG.md` and the code in `src/`.
+2. Apply the changes; new logic gets tests in `logic.test.ts`.
+3. Bump the semver version in `game.json`, add a `CHANGELOG.md` entry, update `README.md`.
+4. Run `pnpm typecheck && pnpm test`; if ready, use the release-game skill.
+All support files must be in English.

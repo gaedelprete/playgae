@@ -4,5 +4,5 @@
   "version": "0.1.0",
   "orientation": "portrait",
   "status": "in-development",
-  "notes": "Descrivi qui il concept e cosa manca."
+  "notes": "Tic-tac-toe vs minimax AI with mistakes. Missing: sound, difficulty levels, real Bridge config."
 }

@@ -10,7 +10,7 @@ const t = createI18n({
 const SIZE = 192
 const ORIGIN_X = 720 / 2 - (3 * SIZE) / 2
 const ORIGIN_Y = 1280 / 2 - (3 * SIZE) / 2 - 40
-// L'AI sbaglia ogni tanto, così si può vincere.
+// The AI occasionally blunders so the player can win.
 const AI_MISTAKE = 0.25
 
 interface Stats { w: number; d: number; l: number }

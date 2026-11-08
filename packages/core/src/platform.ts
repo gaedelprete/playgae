@@ -1,9 +1,9 @@
 import bridge from '@playgama/bridge'
 
 /**
- * Wrapper sottile sul Playgama Bridge. Fuori da Playgama (dev locale) il Bridge
- * ripiega su una piattaforma "mock", quindi il codice di gioco non deve mai
- * controllare dove gira. Tutti i metodi sono sicuri anche se un modulo non è supportato.
+ * Thin wrapper over the Playgama Bridge. Outside Playgama (local dev) the Bridge
+ * falls back to a "mock" platform, so game code never needs to check where it runs.
+ * All methods are safe even if a module is unsupported.
  */
 export const platform = {
   async init(): Promise<void> {
@@ -14,7 +14,7 @@ export const platform = {
     }
   },
 
-  /** Lingua a 2 lettere (es. "it", "en"). */
+  /** 2-letter language (e.g. "it", "en"). */
   get language(): string {
     try {
       return (bridge.platform.language || 'en').slice(0, 2).toLowerCase()
@@ -27,7 +27,7 @@ export const platform = {
     try { bridge.setGameLoadingProgress(Math.round(percent)) } catch { /* noop */ }
   },
 
-  /** Da chiamare quando il gioco è giocabile (fine caricamento). */
+  /** Call when the game is playable (loading finished). */
   gameReady(): void {
     try { bridge.platform.sendMessage(bridge.PLATFORM_MESSAGE.GAME_READY) } catch { /* noop */ }
   },
@@ -38,7 +38,7 @@ export const platform = {
     try { bridge.platform.sendMessage(bridge.PLATFORM_MESSAGE.GAMEPLAY_STOPPED) } catch { /* noop */ }
   },
 
-  /** Interstitial: risolve quando l'annuncio è chiuso/fallito/non disponibile. */
+  /** Interstitial: resolves when the ad is closed, failed or unavailable. */
   showInterstitial(): Promise<void> {
     return new Promise((resolve) => {
       try {
@@ -56,7 +56,7 @@ export const platform = {
     })
   },
 
-  /** Rewarded: risolve true se il giocatore ha ottenuto la ricompensa. */
+  /** Rewarded: resolves true if the player earned the reward. */
   showRewarded(): Promise<boolean> {
     return new Promise((resolve) => {
       try {
@@ -76,7 +76,7 @@ export const platform = {
     })
   },
 
-  /** Notifica pausa/ripresa e mute richiesti dalla piattaforma. */
+  /** Pause/resume and mute requests from the platform. */
   onPauseChange(cb: (paused: boolean) => void): void {
     try {
       bridge.on(bridge.EVENT_NAME.PAUSE_STATE_CHANGED, (p: boolean) => cb(!!p))

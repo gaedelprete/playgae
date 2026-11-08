@@ -36,7 +36,7 @@ function minimax(b: Board, turn: 'X' | 'O', me: 'X' | 'O', depth: number): numbe
   return turn === me ? Math.max(...scores) : Math.min(...scores)
 }
 
-/** Mossa dell'AI. `mistakeChance` (0..1) la rende battibile: con quella probabilità gioca a caso. */
+/** AI move. `mistakeChance` (0..1) makes it beatable: with that probability it plays randomly. */
 export function aiMove(b: Board, me: 'X' | 'O', mistakeChance = 0, rng: () => number = Math.random): number {
   const free = b.flatMap((c, i) => (c ? [] : [i]))
   if (free.length === 0) return -1
