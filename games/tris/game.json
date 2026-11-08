@@ -1,8 +1,8 @@
 {
   "name": "Tris",
   "slug": "tris",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "orientation": "portrait",
   "status": "in-development",
-  "notes": "Tic-tac-toe vs minimax AI with mistakes. Missing: sound, difficulty levels, real Bridge config."
+  "notes": "Tic-tac-toe vs minimax AI with 5 levels (win = harder, loss = easier). Has tutorial, mute button, music + sfx. Audio files are ffmpeg-generated PLACEHOLDERS: replace with produced ogg/mp3 before release (Playgama 3.3.2). Missing: real Bridge config."
 }

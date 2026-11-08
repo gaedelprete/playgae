@@ -52,3 +52,49 @@ export function aiMove(b: Board, me: 'X' | 'O', mistakeChance = 0, rng: () => nu
   }
   return bestMoves[Math.floor(rng() * bestMoves.length)]!
 }
+
+/** Probability that the AI plays a random move, per level (index 0 = level 1). Level 5 never blunders. */
+export const LEVEL_MISTAKES = [0.6, 0.4, 0.25, 0.1, 0] as const
+export const MAX_LEVEL = LEVEL_MISTAKES.length
+
+export const mistakeChanceFor = (level: number): number =>
+  LEVEL_MISTAKES[Math.min(Math.max(level, 1), MAX_LEVEL) - 1]!
+
+export type Outcome = 'win' | 'draw' | 'lose'
+
+export interface Progress {
+  /** Current difficulty level (1..MAX_LEVEL). */
+  level: number
+  /** Highest level ever reached. */
+  bestLevel: number
+  /** Current and best consecutive wins. */
+  streak: number
+  bestStreak: number
+}
+
+export const newProgress = (): Progress => ({ level: 1, bestLevel: 1, streak: 0, bestStreak: 0 })
+
+/** Normalizes a saved value (possibly missing or from an older version) into a valid Progress. */
+export function sanitizeProgress(raw: Partial<Progress> | null | undefined): Progress {
+  const p = newProgress()
+  if (!raw || typeof raw !== 'object') return p
+  const num = (v: unknown, fallback: number) => (typeof v === 'number' && Number.isFinite(v) && v >= 0 ? Math.floor(v) : fallback)
+  p.level = Math.min(Math.max(num(raw.level, 1), 1), MAX_LEVEL)
+  p.bestLevel = Math.min(Math.max(num(raw.bestLevel, p.level), p.level), MAX_LEVEL)
+  p.streak = num(raw.streak, 0)
+  p.bestStreak = Math.max(num(raw.bestStreak, 0), p.streak)
+  return p
+}
+
+/** Wins raise the level, losses lower it, draws keep it. Returns a new object. */
+export function applyOutcome(p: Progress, outcome: Outcome): Progress {
+  let { level, streak } = p
+  if (outcome === 'win') { level = Math.min(level + 1, MAX_LEVEL); streak += 1 }
+  else { streak = 0; if (outcome === 'lose') level = Math.max(level - 1, 1) }
+  return {
+    level,
+    bestLevel: Math.max(p.bestLevel, level),
+    streak,
+    bestStreak: Math.max(p.bestStreak, streak),
+  }
+}

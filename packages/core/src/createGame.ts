@@ -37,7 +37,13 @@ export async function createGame(opts: GameOptions): Promise<Phaser.Game> {
     if (paused) game.pause()
     else game.resume()
   })
-  platform.onAudioChange((enabled) => { game.sound.mute = !enabled })
+  // The platform audio state lives in the registry so scenes can combine it with their own mute button.
+  game.registry.set('platformAudio', platform.isAudioEnabled)
+  game.sound.mute = !platform.isAudioEnabled
+  platform.onAudioChange((enabled) => {
+    game.registry.set('platformAudio', enabled)
+    game.sound.mute = !enabled
+  })
 
   return game
 }

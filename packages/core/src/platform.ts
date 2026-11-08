@@ -23,6 +23,15 @@ export const platform = {
     }
   },
 
+  /** False when the platform asks the game to stay muted (checked at startup, requirement 3.3.4). */
+  get isAudioEnabled(): boolean {
+    try {
+      return bridge.platform.isAudioEnabled !== false
+    } catch {
+      return true
+    }
+  },
+
   setLoadingProgress(percent: number): void {
     try { bridge.setGameLoadingProgress(Math.round(percent)) } catch { /* noop */ }
   },

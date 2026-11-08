@@ -21,10 +21,10 @@ Conventions and the Playgama checklist live in [CLAUDE.md](CLAUDE.md).
 
 | Game | Slug | Version | Status | Orientation | Notes |
 |---|---|---|---|---|---|
-| Tris | `tris` | 0.1.0 | In development (playable) | Portrait | Tic-tac-toe vs minimax AI with mistakes; saved stats; IT/EN |
+| Tris | `tris` | 0.2.0 | In development (playable) | Portrait | Tic-tac-toe vs minimax AI with 5 levels; tutorial; music + sfx + mute; saved stats; IT/EN |
 
 ### Tris
-Classic tic-tac-toe against the computer. The AI uses minimax but plays randomly 25% of the time, so it can be beaten. Win/draw/loss stats are saved through the Bridge, and an interstitial shows between rounds. To do: check the end-of-game screen thoroughly, sound, difficulty levels, a real Bridge config from the config editor.
+Classic tic-tac-toe against the computer. The AI uses minimax with a mistake chance that shrinks over 5 levels: wins raise the level, losses lower it. Level, best streak and win/draw/loss stats are saved through the Bridge, and an interstitial shows between rounds. Includes a first-run tutorial and a mute button. To do: replace the placeholder audio with produced ogg/mp3 files, check the end-of-game screen thoroughly, a real Bridge config from the config editor.
 
 ## Game ideas
 
