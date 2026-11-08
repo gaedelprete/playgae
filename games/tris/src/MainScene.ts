@@ -8,8 +8,8 @@ const t = createI18n({
 })
 
 const SIZE = 192
-const ORIGIN_X = 720 / 2 - SIZE
-const ORIGIN_Y = 1280 / 2 - SIZE - 40
+const ORIGIN_X = 720 / 2 - (3 * SIZE) / 2
+const ORIGIN_Y = 1280 / 2 - (3 * SIZE) / 2 - 40
 // L'AI sbaglia ogni tanto, così si può vincere.
 const AI_MISTAKE = 0.25
 
