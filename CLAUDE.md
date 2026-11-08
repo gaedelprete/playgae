@@ -29,3 +29,5 @@ Zip < ~20 MB, `index.html` in radice, nessuna richiesta di rete esterna, funzion
 ## Giochi
 - `tris`: Tris vs AI (minimax con errori), v0.1.0, vedi `games/tris/game.json`.
 Idee: Puzzle Bubble (griglia esagonale), gioco "sputare dal tetto" (arcade a traiettoria).
+
+Il README.md traccia giochi fatti e idee: aggiornalo quando crei o modifichi un gioco.
