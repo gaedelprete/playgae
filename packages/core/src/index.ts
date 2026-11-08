@@ -1,0 +1,5 @@
+export { createGame } from './createGame'
+export type { GameOptions } from './createGame'
+export { platform } from './platform'
+export { storage } from './storage'
+export { createI18n } from './i18n'

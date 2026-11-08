@@ -1,0 +1,12 @@
+{
+  "name": "@playgae/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {
+    "@playgama/bridge": "^2.4.1",
+    "phaser": "^3.90.0"
+  }
+}
